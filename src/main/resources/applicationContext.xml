@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+		<!-- 引入外部文件 -->
+		<context:property-placeholder location="classpath:database.properties"/>
+		<!-- 支持spring注解 -->
+		<context:component-scan base-package="com.appsys"></context:component-scan>
+		<!-- 配置dbcp数据源 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="${driver}"></property>
+			<property name="url" value="${url}"></property>
+			<property name="username" value="${user}"></property>
+			<property name="password" value="${pwd}"></property>
+		</bean>
+		<!-- 配置session工厂 -->
+		<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<!-- 依赖个数据源 -->
+			<property name="dataSource" ref="dataSource"></property>
+			<!-- 给实体类起别名 -->
+			<property name="typeAliasesPackage" value="com.appsys.pojo"></property>
+			<!-- 加载xml文件 -->
+			<property name="mapperLocations" value="classpath:com/appsys/mapper/*.xml"></property>
+			<!-- 使用分页插件 -->
+			<property name="plugins">
+				<array>
+					<bean class="com.github.pagehelper.PageInterceptor"></bean>
+				</array>
+			</property>
+		</bean>
+		<!-- mapper扫描器 -->
+		<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!-- 扫描mapper接口生成工厂实现类 -->
+			<property name="basePackage" value="com.appsys.mapper"></property>
+			<property name="sqlSessionFactoryBeanName" value="sessionFactory"></property>
+		</bean>
+		<!-- 配置注解式事务 -->
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<!-- 依赖于一个数据源 -->
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+		<!-- 注解事务 -->
+		<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

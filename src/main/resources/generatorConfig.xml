@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 增加开发效率 生成实体类mapper文集以及接口 -->
+	
+	<classPathEntry location="D:\bdxuexi\maven\apache-maven-3.6.3-bin\apache-maven-3.6.3\m2_repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+	
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/app?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+     driverClass="com.mysql.jdbc.Driver" password="xiang" userId="root" />
+    <javaModelGenerator targetPackage="com.appsys.pojo" targetProject="appinfosystem/src/main/java" />
+    <sqlMapGenerator targetPackage="com.appsys.mapper" targetProject="appinfosystem/src/main/resources" />
+    <javaClientGenerator targetPackage="com.appsys.mapper" targetProject="appinfosystem/src/main/java" type="XMLMAPPER" />
+    <table  tableName="ad_promotion" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+    <table  tableName="app_category" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+    <table  tableName="app_info" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+    <table  tableName="app_version" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+    <table  tableName="backend_user" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+    <table  tableName="data_dictionary" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+   
+   <table  tableName="dev_user" enableCountByExample="false"
+    enableDeleteByExample="false" enableSelectByExample="false"
+    enableUpdateByExample="false">
+      
+   </table>
+  </context>
+</generatorConfiguration>
