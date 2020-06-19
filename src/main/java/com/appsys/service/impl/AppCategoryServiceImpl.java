@@ -17,6 +17,16 @@ public class AppCategoryServiceImpl implements AppCategoryService {
 		// TODO Auto-generated method stub
 		return appCategoryMapper.listCategorylevel1();
 	}
+	@Override
+	public List<AppCategory> listCategorylevel2(Integer parentId) {
+		// TODO Auto-generated method stub
+		return appCategoryMapper.listCategorylevel2(parentId);
+	}
+	@Override
+	public List<AppCategory> listCategorylevel3(Integer parentId) {
+		// TODO Auto-generated method stub
+		return appCategoryMapper.listCategorylevel3(parentId);
+	}
 
 	
 	

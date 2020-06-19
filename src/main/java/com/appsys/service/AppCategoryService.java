@@ -10,4 +10,17 @@ public interface AppCategoryService {
 	 * @return
 	 */
 	 List<AppCategory> listCategorylevel1();
+	 /**
+	  * 查询二级分类
+	  * @param parentId
+	  * @return
+	  */
+	 List<AppCategory> listCategorylevel2(Integer parentId);
+	 
+	 /**
+	  * 三级分类
+	  * @param parentId
+	  * @return
+	  */
+	 List<AppCategory> listCategorylevel3(Integer parentId);
 }

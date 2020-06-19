@@ -20,6 +20,10 @@ public class DevUserController {
 		return "dev/dev_main";
 	}
 	
+	/**
+	 *开发者app列表界面
+	 * @return
+	 */
 	@RequestMapping("/list")
 	public String list(){
 		return "dev/dev_app_list";

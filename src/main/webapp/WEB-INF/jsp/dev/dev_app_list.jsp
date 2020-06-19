@@ -41,20 +41,16 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">二级分类</label>
 							<div class="col-md-8">
-								<select class="form-control">
-									<option value="1">手机</option>
-									<option value="1">平板</option>
-									<option value="1">通用</option>
+								<select id="level2" class="form-control">
+								
 								</select>
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">三级分类</label>
 							<div class="col-md-8">
-								<select class="form-control">
-									<option value="1">手机</option>
-									<option value="1">平板</option>
-									<option value="1">通用</option>
+								<select id="level3" class="form-control">
+									
 								</select>
 							</div>
 						</div>
@@ -137,6 +133,7 @@
 <!-- /page content -->
 <%@ include file="./commons/foot.jsp" %>
 <script>
+	/* 所属平台 */
 	$(document).ready(function(){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/data/list",
@@ -147,20 +144,52 @@
 				});
 			}
 		});
-		
+		/* 一级分类 */
 		$.ajax({
 			url:"${pageContext.request.contextPath}/category/l1",
 			dataType:"json",
 			success:function(data){
+				$("#level2").append("<option value='0'>二级分类</option>");
+				$("#level3").append("<option value='0'>三级分类</option>");
 				$.each(data,function(i){
 					$("#level1").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>")
 				});
 			}
 		});
-		$("#level").change(function(){
-			
+		/* 二级分类 */
+		$("#level1").change(function(){
+			$.ajax({
+			url:"${pageContext.request.contextPath}/category/l2",
+			type:"post",
+			dataType:"json",
+			data:{parentId:$(this).val()},
+			success:function(data){
+				$("#level2").html("");
+				$("#level2").append("<option value='0'>二级分类</option>");
+				$.each(data,function(i){
+					$("#level2").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>");
+				});
+			}
 		});
 	});
+	
+	/* 三级分类 */
+		$("#level2").change(function(){
+			$.ajax({
+			url:"${pageContext.request.contextPath}/category/l3",
+			type:"post",
+			dataType:"json",
+			data:{parentId:$(this).val()},
+			success:function(data){
+				$("#level3").html("");
+				$("#level3").append("<option value='0'>三级分类</option>");
+				$.each(data,function(i){
+					$("#level3").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>");
+				});
+			}
+		});
+	});
+});
 </script>
 	</body>
 </html>

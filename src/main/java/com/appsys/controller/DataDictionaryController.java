@@ -14,6 +14,10 @@ import com.appsys.service.DataDictionaryService;
 @RequestMapping("/data")
 public class DataDictionaryController {
 	@Autowired private DataDictionaryService dictionaryService;
+	/**
+	 * 查询所属平台  平板手机通用三个
+	 * @return
+	 */
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<DataDictionary> list(){
