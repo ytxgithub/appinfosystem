@@ -165,4 +165,10 @@
       modifyDate = #{modifydate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+ 	<!--  查找一级分类 -->
+ 	<select id="listCategorylevel1" resultType="AppCategory">
+ 		select <include refid="Base_Column_List"></include>
+ 		from app_category where parentId is null
+ 	</select>
 </mapper>

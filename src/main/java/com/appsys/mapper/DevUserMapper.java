@@ -50,4 +50,11 @@ public interface DevUserMapper {
      * @mbggenerated Wed Jun 17 11:32:14 CST 2020
      */
     int updateByPrimaryKey(DevUser record);
+    
+    /**
+     * 实现开发者登录
+     * @param devUser
+     * @return
+     */
+    DevUser login(DevUser devUser);
 }

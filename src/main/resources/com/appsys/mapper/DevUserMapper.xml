@@ -190,4 +190,10 @@
       modifyDate = #{modifydate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+ 	<!--  开发者登录 -->
+  <select id="login" parameterType="DevUser" resultType="DevUser">
+  		select <include refid="Base_Column_List"></include>
+  		from dev_user where devCode=#{devcode} and devPassword=#{devpassword}
+  </select>
 </mapper>

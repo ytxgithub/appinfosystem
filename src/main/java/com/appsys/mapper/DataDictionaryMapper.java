@@ -1,5 +1,7 @@
 package com.appsys.mapper;
 
+import java.util.List;
+
 import com.appsys.pojo.DataDictionary;
 
 public interface DataDictionaryMapper {
@@ -50,4 +52,10 @@ public interface DataDictionaryMapper {
      * @mbggenerated Wed Jun 17 11:32:14 CST 2020
      */
     int updateByPrimaryKey(DataDictionary record);
+    
+    /**
+     * 查询所属平台
+     * @return
+     */
+    List<DataDictionary> listFlatform();
 }

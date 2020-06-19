@@ -1,5 +1,7 @@
 package com.appsys.mapper;
 
+import java.util.List;
+
 import com.appsys.pojo.AppCategory;
 
 public interface AppCategoryMapper {
@@ -50,4 +52,13 @@ public interface AppCategoryMapper {
      * @mbggenerated Wed Jun 17 11:32:14 CST 2020
      */
     int updateByPrimaryKey(AppCategory record);
+    
+    /**
+     * 获取 一二三级分类
+     * @return
+     */
+    List<AppCategory> listCategorylevel1();
+    List<AppCategory> listCategorylevel2(Integer parentId);
+    List<AppCategory> listCategorylevel3(Integer parentId);
+    
 }
