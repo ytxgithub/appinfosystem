@@ -31,11 +31,15 @@ public class DevUserLoginController {
 	public String login(DevUser devUser,HttpServletRequest request){
 		if(devUser.getDevcode()!=null&&!devUser.getDevcode().trim().equals("")&&devUser.getDevpassword()!=null&&!devUser.getDevpassword().trim().equals("")){
 			DevUser devUser2=devUserService.login(devUser);
-			HttpSession session=request.getSession();
-			session.setAttribute("DEV_USER",devUser2);
+			if(devUser2!=null){
+				HttpSession session=request.getSession();
+				session.setAttribute("DEV_USER",devUser2);
+				return "dev/dev_main";
+			}
+			
 		}
-		return "dev/dev_main";
 		
+		return "dev/dev_login";
 	}
 	
 	/**

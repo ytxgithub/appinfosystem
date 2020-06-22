@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="./commons/head.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <div class="right_col" role="main">
 	<div class="row">
 		<div class="col-md-12">
@@ -9,23 +10,23 @@
 					<h4>搜索应用</h4>
 				</div>
 				<div class="panel-body">
-					<form action="" class="form-horizontal">
+					<form action="${pageContext.request.contextPath }/appinfo/applist" method="get" class="form-horizontal">
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">软件名称</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control">
+								<input type="text" name="softwarename" class="form-control">
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">APP名称</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control">
+								<input type="text" name="apkname" class="form-control">
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">所属平台</label>
 							<div class="col-md-8">
-								<select id="select" class="form-control">
+								<select id="flatformid" class="form-control">
 									<option value="0">所属平台</option>
 								</select>
 							</div>
@@ -33,7 +34,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">一级分类</label>
 							<div class="col-md-8">
-								<select id="level1" class="form-control">
+								<select id="categoryLevel1" class="form-control">
 									<option value="0">一级分类</option>
 								</select>
 							</div>
@@ -41,7 +42,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">二级分类</label>
 							<div class="col-md-8">
-								<select id="level2" class="form-control">
+								<select id="categoryLevel2" class="form-control">
 								
 								</select>
 							</div>
@@ -49,7 +50,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">三级分类</label>
 							<div class="col-md-8">
-								<select id="level3" class="form-control">
+								<select id="categoryLevel3" class="form-control">
 									
 								</select>
 							</div>
@@ -84,15 +85,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
-										<td>表格数据</td>
+									<c:forEach var="appInfo" items="${appInfoList }">
+										<tr>
+										<td>${appInfo.softwarename }</td>
+											<td>${appInfo.apkname }</td>
+											<td>${appInfo.softwaresize }</td>
+											<td>${appInfo.flatformName }</td>
+											<td>${appInfo.categorylevel1Name }->${appInfo.categorylevel2Name }->${appInfo.categorylevel3Name }</td>
+											<td>${appInfo.statusName }</td>
+											<td>${appInfo.downloads }</td>
+											<td>${appInfo.versionName }</td>
 										<td>
 											<div class="btn-group dropdown">
 												<button type="button" class="btn btn-danger">选择操作</button>
@@ -110,18 +112,25 @@
 											</div>
 										</td>
 									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<ul class="pagination pull-right">
-								<li><a href="#"> <span>&laquo;</span>
-								</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
+								<li>
+									<a href="#"> <span>&laquo;</span></a>
+								</li>
+								<c:forEach begin="1" end="${pageCount }" var="i" step="1">
+									<li id="a">
+										<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${i}">
+											${i }
+										</a>	
+									</li>
+								</c:forEach>
+								
+								
 								<li><a href="#" aria-label="Next"> <span>&raquo;</span>
-								</a></li>
+								</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -140,7 +149,7 @@
 			dataType:"json",
 			success:function(data){
 				$.each(data,function(i){
-					$("#select").append("<option value="+data[i].valueid+">"+data[i].valuename+"</option>")
+					$("#flatformid").append("<option value="+data[i].valueid+">"+data[i].valuename+"</option>")
 				});
 			}
 		});
@@ -149,15 +158,15 @@
 			url:"${pageContext.request.contextPath}/category/l1",
 			dataType:"json",
 			success:function(data){
-				$("#level2").append("<option value='0'>二级分类</option>");
-				$("#level3").append("<option value='0'>三级分类</option>");
+				$("#categoryLevel2").append("<option value='0'>二级分类</option>");
+				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
 				$.each(data,function(i){
-					$("#level1").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>")
+					$("#categoryLevel1").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>")
 				});
 			}
 		});
 		/* 二级分类   选择一级分类的时候 二级三级分类清空*/
-		$("#level1").change(function() {
+		$("#categoryLevel1").change(function() {
 			if ($(this).val() != 0) {
 				$.ajax({
 					url : "${pageContext.request.contextPath}/category/l2",
@@ -167,26 +176,26 @@
 						parentId : $(this).val()
 					},
 					success : function(data) {
-						$("#level2").html("");
-						$("#level2").append("<option value='0'>二级分类</option>");
-						$("#level3").html("");
-						$("#level3").append("<option value='0'>三级分类</option>");
+						$("#categoryLevel2").html("");
+						$("#categoryLevel2").append("<option value='0'>二级分类</option>");
+						$("#categoryLevel3").html("");
+						$("#categoryLevel3").append("<option value='0'>三级分类</option>");
 						$.each(data, function(i) {
-							$("#level2").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
+							$("#categoryLevel2").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
 						});
 					}
 				});
 			} else {
-				$("#level2").html("");
-				$("#level2").append("<option value='0'>二级分类</option>");
-				$("#level3").html("");
-				$("#level3").append("<option value='0'>三级分类</option>");
+				$("#categoryLevel2").html("");
+				$("#categoryLevel2").append("<option value='0'>二级分类</option>");
+				$("#categoryLevel3").html("");
+				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
 			}
 
 		});
 
 		/* 三级分类  选择二级分类 三级分类清空*/
-		$("#level2").change(function() {
+		$("#categoryLevel2").change(function() {
 			if ($(this).val() != 0) {
 				$.ajax({
 					url : "${pageContext.request.contextPath}/category/l3",
@@ -196,18 +205,19 @@
 						parentId : $(this).val()
 					},
 					success : function(data) {
-						$("#level3").html("");
-						$("#level3").append("<option value='0'>三级分类</option>");
+						$("#categoryLevel3").html("");
+						$("#categoryLevel3").append("<option value='0'>三级分类</option>");
 						$.each(data, function(i) {
-							$("#level3").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
+							$("#categoryLevel3").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
 						});
 					}
 				});
 			} else {
-				$("#level3").html("");
-				$("#level3").append("<option value='0'>三级分类</option>");
+				$("#categoryLevel3").html("");
+				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
 			}
 		});
+		
 	});
 </script>
 	</body>

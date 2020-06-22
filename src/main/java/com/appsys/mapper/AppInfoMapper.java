@@ -1,5 +1,9 @@
 package com.appsys.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.appsys.pojo.AppInfo;
 
 public interface AppInfoMapper {
@@ -39,4 +43,13 @@ public interface AppInfoMapper {
 	 * @mbggenerated  Fri Jun 19 17:35:16 CST 2020
 	 */
 	int updateByPrimaryKey(AppInfo record);
+	
+	/**
+	 * 按调价搜索应用 分页
+	 * @param appInfo
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	List<AppInfo> search(AppInfo appInfo);
 }
