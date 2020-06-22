@@ -156,40 +156,59 @@
 				});
 			}
 		});
-		/* 二级分类 */
-		$("#level1").change(function(){
-			$.ajax({
-			url:"${pageContext.request.contextPath}/category/l2",
-			type:"post",
-			dataType:"json",
-			data:{parentId:$(this).val()},
-			success:function(data){
+		/* 二级分类   选择一级分类的时候 二级三级分类清空*/
+		$("#level1").change(function() {
+			if ($(this).val() != 0) {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/category/l2",
+					type : "post",
+					dataType : "json",
+					data : {
+						parentId : $(this).val()
+					},
+					success : function(data) {
+						$("#level2").html("");
+						$("#level2").append("<option value='0'>二级分类</option>");
+						$("#level3").html("");
+						$("#level3").append("<option value='0'>三级分类</option>");
+						$.each(data, function(i) {
+							$("#level2").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
+						});
+					}
+				});
+			} else {
 				$("#level2").html("");
 				$("#level2").append("<option value='0'>二级分类</option>");
-				$.each(data,function(i){
-					$("#level2").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>");
-				});
-			}
-		});
-	});
-	
-	/* 三级分类 */
-		$("#level2").change(function(){
-			$.ajax({
-			url:"${pageContext.request.contextPath}/category/l3",
-			type:"post",
-			dataType:"json",
-			data:{parentId:$(this).val()},
-			success:function(data){
 				$("#level3").html("");
 				$("#level3").append("<option value='0'>三级分类</option>");
-				$.each(data,function(i){
-					$("#level3").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>");
+			}
+
+		});
+
+		/* 三级分类  选择二级分类 三级分类清空*/
+		$("#level2").change(function() {
+			if ($(this).val() != 0) {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/category/l3",
+					type : "post",
+					dataType : "json",
+					data : {
+						parentId : $(this).val()
+					},
+					success : function(data) {
+						$("#level3").html("");
+						$("#level3").append("<option value='0'>三级分类</option>");
+						$.each(data, function(i) {
+							$("#level3").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
+						});
+					}
 				});
+			} else {
+				$("#level3").html("");
+				$("#level3").append("<option value='0'>三级分类</option>");
 			}
 		});
 	});
-});
 </script>
 	</body>
 </html>
