@@ -3,7 +3,14 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-			欢迎${sessionScope.DEV_USER.devname },进入APP开发管理系统
+        	<div class="row">
+        		<div class="col-md-12">
+        			<div class="alert alert-info">
+        				欢迎${sessionScope.DEV_USER.devname },进入APP开发管理系统
+        			</div>
+        		</div>
+        	</div>
+			
         </div>
         <!-- /page content -->
 <%@ include file="./commons/foot.jsp" %>

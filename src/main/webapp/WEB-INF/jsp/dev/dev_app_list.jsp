@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <div class="right_col" role="main">
 	<div class="row">
+        		<div class="col-md-12">
+        			<div class="alert alert-info">
+        				欢迎${sessionScope.DEV_USER.devname },进入APP开发管理系统
+        			</div>
+        		</div>
+        	</div>
+	<div class="row">
 		<div class="col-md-12">
 			<!-- 搜索表单 -->
 			<div class="panel panel-warning">
@@ -14,19 +21,19 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">软件名称</label>
 							<div class="col-md-8">
-								<input type="text" name="softwarename" class="form-control">
+								<input type="text" value="${appinfo.softwarename }" name="softwarename" class="form-control">
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">APP名称</label>
 							<div class="col-md-8">
-								<input type="text" name="apkname" class="form-control">
+								<input type="text" name="apkname" value="${appinfo.apkname }"  class="form-control">
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">所属平台</label>
 							<div class="col-md-8">
-								<select id="flatformid" class="form-control">
+								<select id="flatformid" name="flatformid" class="form-control">
 									<option value="0">所属平台</option>
 								</select>
 							</div>
@@ -34,7 +41,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">一级分类</label>
 							<div class="col-md-8">
-								<select id="categoryLevel1" class="form-control">
+								<select id="categoryLevel1" name="categorylevel1" class="form-control">
 									<option value="0">一级分类</option>
 								</select>
 							</div>
@@ -42,7 +49,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">二级分类</label>
 							<div class="col-md-8">
-								<select id="categoryLevel2" class="form-control">
+								<select id="categoryLevel2" name="categorylevel2" class="form-control">
 								
 								</select>
 							</div>
@@ -50,7 +57,7 @@
 						<div class="form-group col-md-3">
 							<label class="control-label col-md-4">三级分类</label>
 							<div class="col-md-8">
-								<select id="categoryLevel3" class="form-control">
+								<select id="categoryLevel3" name="categorylevel3" class="form-control">
 									
 								</select>
 							</div>
@@ -115,23 +122,70 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<ul class="pagination pull-right">
-								<li>
-									<a href="#"> <span>&laquo;</span></a>
-								</li>
+							<%-- <ul class="pagination pull-right">
+								<c:choose>
+									<c:when test="${param.pageIndex!=null and param.pageIndex>1 }">
+										<li>
+											<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${pageIndex-1}${par}"> <span>&laquo;</span></a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<a href="#"> <span>&laquo;</span></a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+								
 								<c:forEach begin="1" end="${pageCount }" var="i" step="1">
-									<li id="a">
-										<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${i}">
+									<li>
+										<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${i}${par}">
 											${i }
 										</a>	
 									</li>
 								</c:forEach>
 								
+								<c:choose>
+									<c:when test="${param.pageIndex==null or param.pageIndex<pageCount}">
+										<li>
+											<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${pageIndex+2}&${par}" aria-label="Next"> <span>&raquo;</span></a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<a href="#" aria-label="Next"> <span>&raquo;</span></a>
+										</li>
+									</c:otherwise>
+								</c:choose>
 								
-								<li><a href="#" aria-label="Next"> <span>&raquo;</span>
-								</a>
-								</li>
+							</ul> --%>
+							<ul class="pagination pull-right">
+								<c:choose>
+									<c:when test="${param.pageIndex != null and param.pageIndex > 1 }">
+										<li><a href="?pageIndex=${param.pageIndex - 1 }${par}"> <span>&laquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled"><a href="#"> <span>&laquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:forEach begin="1" end="${pageCount }" step="1" var="i">
+									<li><a href="?pageIndex=${i }${par}">${i }</a></li>
+								</c:forEach>
+								<c:choose>
+									<c:when
+										test="${param.pageIndex != null and param.pageIndex < pageCount }">
+										<li><a href="?pageIndex=${param.pageIndex + 1 }${par}"> <span>&raquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled"><a href="#"> <span>&raquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+
 							</ul>
+							
 						</div>
 					</div>
 				</div>

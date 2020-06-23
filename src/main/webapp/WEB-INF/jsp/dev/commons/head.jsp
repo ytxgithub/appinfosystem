@@ -59,7 +59,7 @@
                   <li><a><i class="fa fa-edit"></i> APP应用管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="${pageContext.request.contextPath }/appinfo/applist">应用列表</a></li>
-					  <li><a href="#">添加应用</a></li>
+					  <li><a href="${pageContext.request.contextPath }/appinfo/appnew_form">添加应用</a></li>
                     </ul>
                   </li>
                 </ul>

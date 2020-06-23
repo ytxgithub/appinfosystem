@@ -18,5 +18,10 @@ public class AppInfoServiceImpl  implements AppInfoService{
 		PageInfo<AppInfo> pageInfo=new PageInfo<AppInfo>(appInfoMapper.search(appInfo));
 		return pageInfo;
 	}
+	@Override
+	public Integer save(AppInfo appInfo) {
+		// TODO Auto-generated method stub
+		return appInfoMapper.insertSelective(appInfo);
+	}
 	
 }

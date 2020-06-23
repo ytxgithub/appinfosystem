@@ -12,4 +12,11 @@ public interface AppInfoService {
 	 * @return
 	 */
 	PageInfo<AppInfo> search(AppInfo appInfo,Integer pageIndex,Integer pageSize);
+	
+	/**
+	 * app产品增加
+	 * @param appInfo
+	 * @return
+	 */
+	Integer save(AppInfo appInfo);
 }
