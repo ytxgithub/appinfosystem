@@ -23,5 +23,15 @@ public class AppInfoServiceImpl  implements AppInfoService{
 		// TODO Auto-generated method stub
 		return appInfoMapper.insertSelective(appInfo);
 	}
+	@Override
+	public AppInfo findAppInfoById(Long id) {
+		// TODO Auto-generated method stub
+		return appInfoMapper.selectByPrimaryKey(id);
+	}
+	@Override
+	public Integer modify(AppInfo appInfo) {
+		// TODO Auto-generated method stub
+		return appInfoMapper.updateByPrimaryKeySelective(appInfo);
+	}
 	
 }

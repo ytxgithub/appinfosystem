@@ -2,12 +2,14 @@ package com.appsys.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,7 +88,59 @@ public class AppInfoController {
 			appInfo.setDevid(devUser.getId());
 			appInfo.setStatus(1L);
 			appInfo.setDownloads(0L);
+			appInfo.setCreatedby(devUser.getId());
+			appInfo.setCreationdate(new Date());
 			appInfoService.save(appInfo);
+		}
+		return "redirect:/appinfo/applist";
+	}
+	
+	/*查询出一个app 跳转到修改界面*/
+	@RequestMapping("/updateapp_form")
+	public ModelAndView updateAppForm(@ModelAttribute("appInfo") AppInfo appInfo,Long appid){
+		ModelAndView mView=new ModelAndView("dev/dev_modify");
+		appInfo=appInfoService.findAppInfoById(appid);
+		mView.addObject("appInfo",appInfo);
+		return mView;
+	}
+	
+	/**
+	 * 修改app信息
+	 * @return
+	 */
+	@RequestMapping("/updateappinfo")
+	public String updateAppInfo(AppInfo appInfo,Model model,MultipartFile file,HttpServletRequest request){
+		String newFileName="";
+		String savePathFile="";
+		if(file!=null&&!file.isEmpty()){
+			/*把文件上传到哪里*/
+			String targetFolder=request.getServletContext().getRealPath("/uploads");
+			/*上传文件的新名字的前缀*/
+			String prefixFileName=String.valueOf(System.currentTimeMillis());
+			//上传文件的扩展名
+			String extName=file.getOriginalFilename().split("\\.")
+					[file.getOriginalFilename().split("\\.").length-1];
+			/*上传文件的新名字*/
+			newFileName=prefixFileName+"."+extName;
+			/*保存到哪里*/
+			savePathFile=targetFolder+File.separator+newFileName;
+			try {
+				file.transferTo(new File(savePathFile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(!newFileName.equals("")&&!savePathFile.equals("")){
+				appInfo.setLogolocpath(savePathFile);
+				appInfo.setLogopicpath(newFileName);
+			}
+			DevUser devUser=(DevUser) request.getSession().getAttribute("DEV_USER");
+			appInfoService.modify(appInfo);
+			appInfo.setModifyby(devUser.getId());
+			appInfo.setModifydate(new Date());
 		}
 		return "redirect:/appinfo/applist";
 	}

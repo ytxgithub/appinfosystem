@@ -42,7 +42,7 @@
 							<label class="control-label col-md-4">一级分类</label>
 							<div class="col-md-8">
 								<select id="categoryLevel1" name="categorylevel1" class="form-control">
-									<option value="0">一级分类</option>
+									
 								</select>
 							</div>
 						</div>
@@ -111,8 +111,8 @@
 													<span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a href="#">操作</a></li>
-													<li><a href="#">操作</a></li>
+													<li><a href="${pageContext.request.contextPath }/appinfo/updateapp_form?appid=${appInfo.id}">修改</a></li>
+													<li><a href="${pageContext.request.contextPath }/appversion/newversion_form?appid=${appInfo.id}">增加版本</a></li>
 													<li><a href="#">操作</a></li>
 													<li><a href="#">操作</a></li>
 												</ul>
@@ -122,42 +122,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<%-- <ul class="pagination pull-right">
-								<c:choose>
-									<c:when test="${param.pageIndex!=null and param.pageIndex>1 }">
-										<li>
-											<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${pageIndex-1}${par}"> <span>&laquo;</span></a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="disabled">
-											<a href="#"> <span>&laquo;</span></a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-								<c:forEach begin="1" end="${pageCount }" var="i" step="1">
-									<li>
-										<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${i}${par}">
-											${i }
-										</a>	
-									</li>
-								</c:forEach>
-								
-								<c:choose>
-									<c:when test="${param.pageIndex==null or param.pageIndex<pageCount}">
-										<li>
-											<a href="${pageContext.request.contextPath }/appinfo/applist?pageIndex=${pageIndex+2}&${par}" aria-label="Next"> <span>&raquo;</span></a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li class="disabled">
-											<a href="#" aria-label="Next"> <span>&raquo;</span></a>
-										</li>
-									</c:otherwise>
-								</c:choose>
-								
-							</ul> --%>
+							
 							<ul class="pagination pull-right">
 								<c:choose>
 									<c:when test="${param.pageIndex != null and param.pageIndex > 1 }">
@@ -195,84 +160,8 @@
 </div>
 <!-- /page content -->
 <%@ include file="./commons/foot.jsp" %>
-<script>
-	/* 所属平台 */
-	$(document).ready(function(){
-		$.ajax({
-			url:"${pageContext.request.contextPath}/data/list",
-			dataType:"json",
-			success:function(data){
-				$.each(data,function(i){
-					$("#flatformid").append("<option value="+data[i].valueid+">"+data[i].valuename+"</option>")
-				});
-			}
-		});
-		/* 一级分类 */
-		$.ajax({
-			url:"${pageContext.request.contextPath}/category/l1",
-			dataType:"json",
-			success:function(data){
-				$("#categoryLevel2").append("<option value='0'>二级分类</option>");
-				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
-				$.each(data,function(i){
-					$("#categoryLevel1").append("<option value="+data[i].id+">"+data[i].categoryname+"</option>")
-				});
-			}
-		});
-		/* 二级分类   选择一级分类的时候 二级三级分类清空*/
-		$("#categoryLevel1").change(function() {
-			if ($(this).val() != 0) {
-				$.ajax({
-					url : "${pageContext.request.contextPath}/category/l2",
-					type : "post",
-					dataType : "json",
-					data : {
-						parentId : $(this).val()
-					},
-					success : function(data) {
-						$("#categoryLevel2").html("");
-						$("#categoryLevel2").append("<option value='0'>二级分类</option>");
-						$("#categoryLevel3").html("");
-						$("#categoryLevel3").append("<option value='0'>三级分类</option>");
-						$.each(data, function(i) {
-							$("#categoryLevel2").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
-						});
-					}
-				});
-			} else {
-				$("#categoryLevel2").html("");
-				$("#categoryLevel2").append("<option value='0'>二级分类</option>");
-				$("#categoryLevel3").html("");
-				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
-			}
-
-		});
-
-		/* 三级分类  选择二级分类 三级分类清空*/
-		$("#categoryLevel2").change(function() {
-			if ($(this).val() != 0) {
-				$.ajax({
-					url : "${pageContext.request.contextPath}/category/l3",
-					type : "post",
-					dataType : "json",
-					data : {
-						parentId : $(this).val()
-					},
-					success : function(data) {
-						$("#categoryLevel3").html("");
-						$("#categoryLevel3").append("<option value='0'>三级分类</option>");
-						$.each(data, function(i) {
-							$("#categoryLevel3").append("<option value=" + data[i].id + ">" + data[i].categoryname + "</option>");
-						});
-					}
-				});
-			} else {
-				$("#categoryLevel3").html("");
-				$("#categoryLevel3").append("<option value='0'>三级分类</option>");
-			}
-		});
-		
-	});
+<script src="${pageContext.request.contextPath }/js2/fenlei.js">
+	
 </script>
 	</body>
 </html>

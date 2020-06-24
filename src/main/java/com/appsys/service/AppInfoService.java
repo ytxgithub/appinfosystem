@@ -19,4 +19,18 @@ public interface AppInfoService {
 	 * @return
 	 */
 	Integer save(AppInfo appInfo);
+	
+	/**
+	 * 修改 要先查询出来单个app信息
+	 * @param id
+	 * @return
+	 */
+	AppInfo findAppInfoById(Long id);
+	
+	/**
+	 * 修改app信息
+	 * @param appInfo
+	 * @return
+	 */
+	Integer modify(AppInfo appInfo);
 }

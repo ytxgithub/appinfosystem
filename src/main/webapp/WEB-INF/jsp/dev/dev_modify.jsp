@@ -14,12 +14,12 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="panel panel-warning" style="margin-bottom: 60px">
 						<div class="panel-heading">
-							<h4>新增APP基础信息</h4>
+							<h4>修改APP基础信息</h4>
 						</div>
 						<div class="panel-body">
-							<fm:form action="${pageContext.request.contextPath}/appinfo/newapp" method="post" modelAttribute="appInfo"
+							<fm:form action="${pageContext.request.contextPath}/appinfo/updateappinfo" method="post" modelAttribute="appInfo"
 							  class="form-horizontal" enctype="multipart/form-data">
-								
+								<fm:hidden path="id"/>
 								<div class="form-group">
 									<label class="control-label col-md-2">软件名称</label>
 									<div class="col-md-10">
@@ -109,13 +109,14 @@
 								<div class="form-group">
 									<label class="control-label col-md-2">LOGO图片</label>
 									<div class="col-md-10">
+										<img src="${pageContext.request.contextPath }/uploads/${appInfo.logopicpath}" alt="" class="thumbnail">
 										<input type="file" name="file" class="form-control" />
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<div class="col-md-10 col-md-offset-2">
-										<button type="submit" class="btn btn-success">保存</button>
+										<button type="submit" class="btn btn-success">修改</button>
 										<a class="btn btn-danger" href="${pageContext.request.contextPath }/appinfo/applist">返回</a>
 									</div>
 								</div>
