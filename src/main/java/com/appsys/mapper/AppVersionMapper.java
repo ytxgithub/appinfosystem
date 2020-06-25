@@ -1,5 +1,7 @@
 package com.appsys.mapper;
 
+import java.util.List;
+
 import com.appsys.pojo.AppVersion;
 
 public interface AppVersionMapper {
@@ -39,4 +41,11 @@ public interface AppVersionMapper {
 	 * @mbggenerated  Fri Jun 19 17:35:16 CST 2020
 	 */
 	int updateByPrimaryKey(AppVersion record);
+	
+	/**
+	 * 根据app的id查出历史一共的版本列表
+	 * @param appid
+	 * @return
+	 */
+	List<AppVersion> findAppId(Long appid);
 }

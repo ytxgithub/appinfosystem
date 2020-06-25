@@ -3,6 +3,7 @@ package com.appsys.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,14 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.appsys.pojo.AppInfo;
+import com.appsys.pojo.AppVersion;
 import com.appsys.pojo.DevUser;
 import com.appsys.service.AppInfoService;
+import com.appsys.service.AppVersionService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/appinfo")
 public class AppInfoController {
 	@Autowired private AppInfoService appInfoService;
+	@Autowired private AppVersionService appVersionService;
 	@RequestMapping("/applist")
 	public ModelAndView applist(@RequestParam(required=false,defaultValue="1")Integer pageIndex,
 								@RequestParam(required=false,defaultValue="6")Integer pageSize,
@@ -143,6 +147,26 @@ public class AppInfoController {
 			appInfo.setModifydate(new Date());
 		}
 		return "redirect:/appinfo/applist";
+	}
+	
+	/**
+	 * 查询app信息  并显示版本列表
+	 * @param appid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showappinfo")
+	public String showAppInfo(Long appid,Model model ){
+		System.out.println("------------------------------------");
+		AppInfo appInfo=appInfoService.selectByPrimaryKey1(appid);
+		List<AppVersion> versionList=appVersionService.findAppId(appid);
+		for (AppVersion appVersion : versionList) {
+			System.out.println(appVersion.getPublishstatusName()+"---------------------");
+		}
+		model.addAttribute("appInfo",appInfo);
+		model.addAttribute("versionList", versionList);
+		return "dev/dev_app_one";
+	
 	}
 	
 }

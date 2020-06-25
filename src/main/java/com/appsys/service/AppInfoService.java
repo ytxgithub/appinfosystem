@@ -33,4 +33,11 @@ public interface AppInfoService {
 	 * @return
 	 */
 	Integer modify(AppInfo appInfo);
+	
+	/**
+	 * 根据id查找应用 显示文字一二三级分类
+	 * @param id
+	 * @return
+	 */
+	AppInfo selectByPrimaryKey1(Long id);
 }

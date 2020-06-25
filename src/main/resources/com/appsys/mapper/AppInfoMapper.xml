@@ -54,6 +54,7 @@
     t1.createdBy, t1.creationDate, t1.modifyBy, t1.modifyDate, t1.categoryLevel1, t1.categoryLevel2, t1.logoPicPath, 
     t1.logoLocPath, t1.versionId
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
@@ -65,6 +66,20 @@
     from app_info
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <select id="selectByPrimaryKey1" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   
+    select 
+    <include refid="Base_Column_List1" />,t2.valueName flatformName
+  	,cl1.categoryName categorylevel1Name ,cl2.categoryName categorylevel2Name 
+  	,cl3.categoryName categorylevel3Name , t3.valueName statusName,av.versionNo versionName
+  	FROM app_info t1 JOIN data_dictionary t2 ON t1.flatformId = t2.valueId JOIN app_category cl1 ON 
+  	t1.categoryLevel1 = cl1.id JOIN app_category cl2 ON t1.categoryLevel2 = cl2.id 
+  	JOIN app_category cl3 ON t1.categoryLevel3 = cl3.id JOIN data_dictionary t3 ON t1.status = t3.valueId 
+  	LEFT JOIN app_version av ON t1.versionId = av.id
+    where t1.id = #{id,jdbcType=BIGINT} and t2.typeCode = 'APP_FLATFORM' and t3.typeCode = 'APP_STATUS'
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
       WARNING - @mbggenerated
@@ -369,36 +384,7 @@
   </update>
  <!--  app按条件应用搜索  -->
   <select id="search" parameterType="object" resultType="AppInfo">
-  		<!-- select <include refid="Base_Column_List1"></include>,t2.valueName flatformName,
-  		,cl1.categoryName categorylevel1Name ,cl2.categoryName categorylevel2Name 
-  		,cl3.categoryName categorylevel3Name ,t3.valueName statusName,av.versionNo versionName
-  		from app_info t1 join data_dictionary t2 on t1.flatformId = t2.valueId join app_category
-  		cl1 on t1.categoryLevel1 = cl1.id join app_category cl2 on t1.categoryLevel2 = cl2.id
-  		join app_category cl3 on t1.categoryLevel3 = cl3.id join data_dictionary t3 on t1.status = t3.valueId 
-  		left join app_version av on t1.versionId = av.id
-  		
-  		<where>
-  		and devId = #{devid} and t2.typeCode = 'APP_FLATFORM' and t3.typeCode = 'APP_STATUS'
-  		<if test="softwarename != null and softwarename != ''">
-  			and softwareName like concat('%',#{softwarename},'%')
-  		</if>
-  		<if test="apkname != null and apkname != ''">
-  			and apkname like concat('%',#{apkname},'%')
-  		</if>
-  		<if test="flatformid != null and flatformid > 0">
-  			and flatformid = #{flatformid}
-  		</if>
-  		<if test="categorylevel1 != null and categorylevel1 > 0">
-  			and categorylevel1 = #{categorylevel1}
-  		</if>
-  		<if test="categorylevel2 != null and categorylevel2 > 0">
-  			and categorylevel2 = #{categorylevel2}
-  		</if>
-  		<if test="categorylevel3 != null and categorylevel3 > 0">
-  			and categorylevel3 = #{categorylevel3}
-  		</if>
-  	</where>
-  	order by t1.id desc -->
+  	
   	select <include refid="Base_Column_List1"></include>,t2.valueName flatformName
   	,cl1.categoryName categorylevel1Name ,cl2.categoryName categorylevel2Name 
   	,cl3.categoryName categorylevel3Name , t3.valueName statusName,av.versionNo versionName

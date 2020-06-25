@@ -111,10 +111,10 @@
 													<span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a href="${pageContext.request.contextPath }/appinfo/updateapp_form?appid=${appInfo.id}">修改</a></li>
+													<li><a href="${pageContext.request.contextPath }/appinfo/updateapp_form?appid=${appInfo.id}">修改app信息</a></li>
 													<li><a href="${pageContext.request.contextPath }/appversion/newversion_form?appid=${appInfo.id}">增加版本</a></li>
-													<li><a href="#">操作</a></li>
-													<li><a href="#">操作</a></li>
+													<li><a href="${pageContext.request.contextPath }/appversion/modify_form?appid=${appInfo.id}">修改最新版本</a></li>
+													<li><a href="${pageContext.request.contextPath }/appinfo/showappinfo?appid=${appInfo.id}">查看app信息</a></li>
 												</ul>
 											</div>
 										</td>

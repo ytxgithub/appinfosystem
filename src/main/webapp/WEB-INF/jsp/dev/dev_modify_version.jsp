@@ -8,7 +8,7 @@
 						<div class="col-md-12">
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<h4>APP版本历史信息</h4>
+									<h4>修改版本信息</h4>
 								</div>
 								<div class="panel-body">
 									<table class="table table-hover table-striped table-bordered">
@@ -47,9 +47,10 @@
 									<h4>增加APP版本信息</h4>
 								</div>
 								<div class="panel-body">
-									<fm:form action="${pageContext.request.contextPath }/appversion/newversion" modelAttribute="appVersion"
+									<fm:form action="${pageContext.request.contextPath }/appversion/modifyversion" modelAttribute="appVersion"
 									 method="post" class="form-horizontal" enctype="multipart/form-data">
 									 <fm:hidden path="appid"/>
+									  <fm:hidden path="id"/>
 										<div class="form-group">
 											<label class="control-label col-md-2">版本号</label>
 											<div class="col-md-10">

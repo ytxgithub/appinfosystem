@@ -33,5 +33,10 @@ public class AppInfoServiceImpl  implements AppInfoService{
 		// TODO Auto-generated method stub
 		return appInfoMapper.updateByPrimaryKeySelective(appInfo);
 	}
+	@Override
+	public AppInfo selectByPrimaryKey1(Long id) {
+		// TODO Auto-generated method stub
+		return appInfoMapper.selectByPrimaryKey1(id);
+	}
 	
 }
