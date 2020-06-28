@@ -99,7 +99,26 @@
 											<td>${appInfo.softwaresize }</td>
 											<td>${appInfo.flatformName }</td>
 											<td>${appInfo.categorylevel1Name }->${appInfo.categorylevel2Name }->${appInfo.categorylevel3Name }</td>
-											<td>${appInfo.statusName }</td>
+											<td>
+												<c:choose>
+													<c:when test="${appInfo.status==1 }">
+														<span class="label label-primary">${appInfo.statusName }</span>
+													</c:when>
+													<c:when test="${appInfo.status==2 }">
+														<span class="label label-success">${appInfo.statusName }</span>
+													</c:when>
+													<c:when test="${appInfo.status==3 }">
+														<span class="label label-info">${appInfo.statusName }</span>
+													</c:when>
+													<c:when test="${appInfo.status==4 }">
+														<span class="label label-warning">${appInfo.statusName }</span>
+													</c:when>
+													<c:when test="${appInfo.status==5 }">
+														<span class="label label-danger">${appInfo.statusName }</span>
+													</c:when>
+												</c:choose>
+											
+											</td>
 											<td>${appInfo.downloads }</td>
 											<td>${appInfo.versionName }</td>
 										<td>
@@ -115,6 +134,17 @@
 													<li><a href="${pageContext.request.contextPath }/appversion/newversion_form?appid=${appInfo.id}">增加版本</a></li>
 													<li><a href="${pageContext.request.contextPath }/appversion/modify_form?appid=${appInfo.id}">修改最新版本</a></li>
 													<li><a href="${pageContext.request.contextPath }/appinfo/showappinfo?appid=${appInfo.id}">查看app信息</a></li>
+														<c:if test="${appInfo.status != 4 }">
+															<li><a href="${pageContext.request.contextPath }/appinfo/delete?appid=${appInfo.id}">删除app</a></li>
+														</c:if>
+														
+														<c:if test="${appInfo.status ==2 or appInfo.status ==5 }">
+															<li><a href="${pageContext.request.contextPath }/appinfo/on_sale?appid=${appInfo.id}">上架</a></li>
+														</c:if>
+														
+														<c:if test="${appInfo.status ==4}">
+															<li><a href="${pageContext.request.contextPath }/appinfo/off_sale?appid=${appInfo.id}">下架</a></li>
+														</c:if>
 												</ul>
 											</div>
 										</td>

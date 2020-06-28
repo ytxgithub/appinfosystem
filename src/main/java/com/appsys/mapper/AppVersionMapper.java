@@ -48,4 +48,8 @@ public interface AppVersionMapper {
 	 * @return
 	 */
 	List<AppVersion> findAppId(Long appid);
+	
+	
+	//根据应用的id删除对应的版本
+	int deleteByAppId(Long appid);
 }

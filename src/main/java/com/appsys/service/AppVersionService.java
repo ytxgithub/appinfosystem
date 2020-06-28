@@ -32,4 +32,11 @@ public interface AppVersionService {
 	 * @return
 	 */
 	int modifyVersion(AppVersion appVersion);
+	
+	/**
+	 * 根据应用的id删除对应的版本
+	 * @param appid
+	 * @return
+	 */
+	int deleteByAppId(Long appid);
 }

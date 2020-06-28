@@ -159,4 +159,5 @@ public class AppVersionController {
 		return "redirect:/appinfo/applist";
 		
 	}
+	
 }

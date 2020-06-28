@@ -416,4 +416,23 @@
   	order by t1.id desc
   		 
   </select>
+  
+  <!-- 根据应用的id修改应用的状态 -->
+  <update id="updateStatus" parameterType="AppInfo">
+  		update app_info 
+  		<set>
+  			status=#{status},
+  			<if test="status != null">
+        		status = #{status,jdbcType=BIGINT},
+      		</if>
+      		<if test="onsaledate != null">
+        		onSaleDate = #{onsaledate,jdbcType=TIMESTAMP},
+      		</if>
+      		<if test="offsaledate != null">
+       			 offSaleDate = #{offsaledate,jdbcType=TIMESTAMP},
+      		</if>
+  		</set>
+  		  where id=#{id}
+  </update>
+  
 </mapper>

@@ -1,5 +1,6 @@
 package com.appsys.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -59,4 +60,7 @@ public interface AppInfoMapper {
 	 * @return
 	 */
 	AppInfo selectByPrimaryKey1(Long id);
+	
+	//根据id修改应用的状态
+	int updateStatus(AppInfo appInfo);
 }

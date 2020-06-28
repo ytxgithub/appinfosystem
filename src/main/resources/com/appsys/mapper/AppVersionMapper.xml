@@ -246,5 +246,9 @@
   		order by t1.id desc
   </select>
   
+  <!-- 根据应用id删除对应的版本 -->
+  <delete id="deleteByAppId" parameterType="long">
+  	delete from app_version where appId=#{appid}
+  </delete>
   
 </mapper>

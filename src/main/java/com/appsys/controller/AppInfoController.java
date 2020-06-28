@@ -169,4 +169,54 @@ public class AppInfoController {
 	
 	}
 	
+	/**
+	 * 删除应用  也删除对应的版本 删除应用的上传的apk文件  还有版本的文件
+	 * @param appid
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	public String delete(Long appid,HttpServletRequest request){
+		String folder=request.getServletContext().getRealPath("/uploads");
+		AppInfo appInfo=appInfoService.findAppInfoById(appid);
+		String fileName=appInfo.getLogopicpath();
+		String path=folder+File.separator+fileName;
+		File file=new File(path);
+		if(file.exists()){
+			file.delete();
+		}
+		List<AppVersion> appVersions=appVersionService.findAppId(appid);
+		for (AppVersion appVersion : appVersions) {
+			String apkFileName=appVersion.getApkfilename();
+			String apkPath=folder+File.separator+apkFileName;
+			File apkFile=new File(apkPath);
+			if(apkFile.exists()){
+				apkFile.delete();
+			}
+		}
+		appInfoService.deleteById(appid);
+		return "redirect:/appinfo/applist";
+	}
+	
+	/**
+	 * 应用的上架
+	 * @param appid
+	 * @return
+	 */
+	@RequestMapping("/on_sale")
+	public String onSale(Long appid){
+		appInfoService.onSale(appid);
+		return "redirect:/appinfo/applist";
+	}
+	
+	/**
+	 * 应用的下架
+	 * @param appid
+	 * @return
+	 */
+	@RequestMapping("/off_sale")
+	public String offSale(Long appid){
+		appInfoService.offSale(appid);
+		return "redirect:/appinfo/applist";
+	}
+	
 }

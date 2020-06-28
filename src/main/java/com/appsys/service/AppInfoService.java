@@ -40,4 +40,17 @@ public interface AppInfoService {
 	 * @return
 	 */
 	AppInfo selectByPrimaryKey1(Long id);
+	
+	/**
+	 * 根据id删除应用
+	 * @param appid
+	 * @return
+	 */
+	int deleteById(Long appid);
+	
+	//上架
+	int onSale(Long appid);
+	
+	//下架
+	int offSale(Long appid);
 }
