@@ -8,7 +8,6 @@
 						<div class="col-md-12">
 							<div class="panel panel-info">
 								<div class="panel-heading">
-								
 									<h4>APP版本历史信息</h4>
 								</div>
 								<div class="panel-body">
