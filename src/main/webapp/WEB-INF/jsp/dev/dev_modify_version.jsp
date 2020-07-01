@@ -44,7 +44,7 @@
 
 							<div class="panel panel-warning">
 								<div class="panel-heading">
-									<h4>增加APP版本信息</h4>
+									<h4>修改APP版本信息</h4>
 								</div>
 								<div class="panel-body">
 									<fm:form action="${pageContext.request.contextPath }/appversion/modifyversion" modelAttribute="appVersion"
@@ -66,7 +66,9 @@
 										<div class="form-group">
 											<label class="control-label col-md-2">发布状态</label>
 											<div class="col-md-10">
-												<div class="form-control-static">预发布</div>
+												<fm:select path="publishstatus" id="publishstatus" class="form-control">
+												
+												</fm:select>
 											</div>
 										</div>
 										<div class="form-group">
@@ -95,6 +97,20 @@
 				</div>
 				<!-- /page content -->
 <%@ include file="./commons/foot.jsp" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/data/version_publishstatus",
+			dataType:"json",
+			success:function(data){
+				$("#publishstatus").append("<option value='0'>选择发布状态</option>");
+				$.each(data,function(i){
+					$("#publishstatus").append("<option value="+data[i].valueid+">"+data[i].valuename+"</option>")
+				});
+			}
+		});
+	});
+</script>
   </body>
 </html>
 

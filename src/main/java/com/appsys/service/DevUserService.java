@@ -9,4 +9,11 @@ public interface DevUserService {
 	 * @return
 	 */
 	DevUser login(DevUser devUser);
+	
+	/**
+	 * 修改开发者密码
+	 * @param newPassword
+	 * @return
+	 */
+	int changePassword(Long devId,String newPassword);
 }

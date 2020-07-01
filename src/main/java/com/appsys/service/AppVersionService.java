@@ -2,6 +2,7 @@ package com.appsys.service;
 
 import java.util.List;
 
+import com.appsys.pojo.AppInfo;
 import com.appsys.pojo.AppVersion;
 
 public interface AppVersionService {
@@ -39,4 +40,6 @@ public interface AppVersionService {
 	 * @return
 	 */
 	int deleteByAppId(Long appid);
+	
+	AppVersion findById2(Long id);
 }

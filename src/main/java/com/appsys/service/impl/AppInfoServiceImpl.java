@@ -74,6 +74,33 @@ public class AppInfoServiceImpl  implements AppInfoService{
 			appInfo.setOffsaledate(new Date());
 			return appInfoMapper.updateStatus(appInfo);
 	}
+	@Override
+	public int pass(Long appid) {
+		// TODO Auto-generated method stub
+		AppInfo appInfo=new AppInfo();
+		appInfo.setId(appid);
+		appInfo.setStatus(2L);
+		appInfo.setOffsaledate(new Date());
+		return appInfoMapper.updateStatus(appInfo);
+	}
+	@Override
+	public int nopass(Long appid) {
+		AppInfo appInfo=new AppInfo();
+		appInfo.setId(appid);
+		appInfo.setStatus(3L);
+		appInfo.setOffsaledate(new Date());
+		return appInfoMapper.updateStatus(appInfo);
+	}
+	@Override
+	public int audit(Long appid) {
+		AppInfo appInfo=new AppInfo();
+		appInfo.setId(appid);
+		appInfo.setStatus(1L);
+		appInfo.setOffsaledate(new Date());
+		return appInfoMapper.updateStatus(appInfo);
+	}
+	
+
 	
 	
 }

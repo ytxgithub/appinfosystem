@@ -53,4 +53,16 @@ public interface AppInfoService {
 	
 	//下架
 	int offSale(Long appid);
+	
+	//审核通过
+	int pass(Long appid);
+	
+	//审核不通过
+	int nopass(Long appid);
+	
+	//待审核状态
+	int audit(Long appid);
+	
+	
+	
 }

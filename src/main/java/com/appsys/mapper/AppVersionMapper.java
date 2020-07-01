@@ -52,4 +52,6 @@ public interface AppVersionMapper {
 	
 	//根据应用的id删除对应的版本
 	int deleteByAppId(Long appid);
+	
+	AppVersion findById2(Long id);
 }

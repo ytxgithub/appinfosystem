@@ -46,4 +46,16 @@ public interface DataDictionaryMapper {
      * @return
      */
     List<DataDictionary> listFlatform();
+    
+    /**
+     * 查询可用状态
+     * @return
+     */
+    List<DataDictionary> listAppStatus();
+    
+    /**
+     * 查询可用的版本(发布状态)
+     * @return
+     */
+    List<DataDictionary> listPublishstatus();
 }

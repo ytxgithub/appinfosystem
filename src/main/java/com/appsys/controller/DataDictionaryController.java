@@ -24,4 +24,17 @@ public class DataDictionaryController {
 		List<DataDictionary> list=dictionaryService.listFlatform();
 		return list;
 	}
+	
+	@RequestMapping("/appstatus")
+	@ResponseBody
+	public List<DataDictionary> appstatus(){
+		return dictionaryService.listAppStatus();
+	}
+	
+	@RequestMapping("/version_publishstatus")
+	@ResponseBody
+	public List<DataDictionary> publishstatus(){
+		return dictionaryService.listPublishstatus();
+		
+	}
 }

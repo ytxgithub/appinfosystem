@@ -179,4 +179,12 @@
       userPassword = #{userpassword,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+<!--   管理员登录 -->
+  <select id="findByBackendUser" resultType="BackendUser" parameterType="BackendUser">
+  		select <include refid="Base_Column_List"></include>
+  		from backend_user where userCode=#{usercode}
+  		and userPassword=#{userpassword}
+  </select>
+  
 </mapper>

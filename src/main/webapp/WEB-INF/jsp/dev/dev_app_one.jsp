@@ -20,77 +20,77 @@
 										<div class="form-group">
 											<label class="control-label col-md-2">软件名称</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" value=${appInfo.softwarename } disabled="true">
+												<input type="text" class="form-control" value=${appInfo.softwarename } disabled>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">APK名称</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.apkname }">
+												<input type="text" class="form-control" disabled value="${appInfo.apkname }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">支持的ROM</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.supportrom }">
+												<input type="text" class="form-control" disabled value="${appInfo.supportrom }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">界面语言</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.interfacelanguage }">
+												<input type="text" class="form-control" disabled value="${appInfo.interfacelanguage }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">软件大小</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.softwaresize }">
+												<input type="text" class="form-control" disabled value="${appInfo.softwaresize }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">下载次数</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.downloads }">
+												<input type="text" class="form-control" disabled value="${appInfo.downloads }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">所属平台</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.flatformName }">
+												<input type="text" class="form-control" disabled value="${appInfo.flatformName }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">一级分类</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.categorylevel1Name }">
+												<input type="text" class="form-control" disabled value="${appInfo.categorylevel1Name }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">二级分类</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.categorylevel2Name }">
+												<input type="text" class="form-control" disabled value="${appInfo.categorylevel2Name }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">三级分类</label>
 											<div class="col-md-10">
-												<input type="text" class="form-control" disabled="true" value="${appInfo.categorylevel3Name }">
+												<input type="text" class="form-control" disabled value="${appInfo.categorylevel3Name }">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="control-label col-md-2">APP状态</label>
 											<div class="col-md-10">
-												<div class="form-control-static" disabled="true">
+												<div class="form-control-static" disabled>
 													${appInfo.statusName }
 												</div>
 											</div>

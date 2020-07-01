@@ -40,5 +40,10 @@ public class AppVersionServiceImpl implements AppVersionService {
 		// TODO Auto-generated method stub
 		return appVersionMapper.deleteByAppId(appid);
 	}
+	@Override
+	public AppVersion findById2(Long id) {
+		// TODO Auto-generated method stub
+		return appVersionMapper.findById2(id);
+	}
 
 }

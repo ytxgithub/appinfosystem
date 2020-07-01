@@ -63,9 +63,11 @@
     -->
     select 
     <include refid="Base_Column_List" />
-    from app_info
+    from app_info 
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  
   
   <select id="selectByPrimaryKey1" parameterType="java.lang.Long" resultMap="BaseResultMap">
    
@@ -79,6 +81,8 @@
   	LEFT JOIN app_version av ON t1.versionId = av.id
     where t1.id = #{id,jdbcType=BIGINT} and t2.typeCode = 'APP_FLATFORM' and t3.typeCode = 'APP_STATUS'
   </select>
+  
+  
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--
@@ -393,7 +397,13 @@
   	JOIN app_category cl3 ON t1.categoryLevel3 = cl3.id JOIN data_dictionary t3 ON t1.status = t3.valueId 
   	LEFT JOIN app_version av ON t1.versionId = av.id
   	<where>
-  		and devId = #{devid} and t2.typeCode = 'APP_FLATFORM' and t3.typeCode = 'APP_STATUS'
+  		  and t2.typeCode = 'APP_FLATFORM' and t3.typeCode = 'APP_STATUS'
+  		<if test="devid!=null and devid>0">
+  		   and 	devId = #{devid}
+  		</if>
+  		<if test="status!=null and status>0">
+  		   and 	status = #{status}
+  		</if>
   		<if test="softwarename != null and softwarename != ''">
   			and softwareName like concat('%',#{softwarename},'%')
   		</if>

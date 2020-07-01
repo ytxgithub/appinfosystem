@@ -45,4 +45,11 @@ public interface DevUserMapper {
      * @return
      */
     DevUser login(DevUser devUser);
+    
+    /**
+     * 修改开发者密码
+     * @param devUser
+     * @return
+     */
+    int changePassword(DevUser devUser);
 }

@@ -10,4 +10,16 @@ public interface DataDictionaryService {
 	 * @return
 	 */
 	List<DataDictionary> listFlatform();
+	
+	/**
+	 * 可用状态
+	 * @return
+	 */
+	List<DataDictionary> listAppStatus();
+	
+	/**
+	 * 查询所有可用发布状态
+	 * @return
+	 */
+	List<DataDictionary> listPublishstatus();
 }

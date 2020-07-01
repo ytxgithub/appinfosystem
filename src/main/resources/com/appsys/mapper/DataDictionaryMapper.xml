@@ -183,4 +183,18 @@
   		select <include refid="Base_Column_List" />
   		from data_dictionary where typeCode='APP_FLATFORM'
   </select>
+  
+<!--   所有可用状态 -->
+  <select id="listAppStatus" resultType="DataDictionary">
+  	select <include refid="Base_Column_List" />
+  	from data_dictionary where typeCode='APP_STATUS'
+  </select>
+  
+  <!--   所有把版本发布状态 -->
+  <select id="listPublishstatus" resultType="DataDictionary">
+  	select <include refid="Base_Column_List" />
+  	from data_dictionary where typeCode='PUBLISH_STATUS'
+  </select>
+  
+  
 </mapper>

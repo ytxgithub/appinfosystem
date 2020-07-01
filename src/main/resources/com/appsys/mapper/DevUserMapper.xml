@@ -196,4 +196,10 @@
   		select <include refid="Base_Column_List" />
   		from dev_user where devCode=#{devcode} and devPassword=#{devpassword}
   </select>
+  
+  <update id="changePassword" parameterType="DevUser">
+  		update dev_user
+  		set devPassword=#{devpassword}
+  		where id=#{id}
+  </update>
 </mapper>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.appsys.pojo.AppInfo;
+import com.appsys.pojo.AppVersion;
 
 public interface AppInfoMapper {
 
@@ -63,4 +64,6 @@ public interface AppInfoMapper {
 	
 	//根据id修改应用的状态
 	int updateStatus(AppInfo appInfo);
+	
+	
 }

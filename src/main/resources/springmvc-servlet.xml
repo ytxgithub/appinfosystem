@@ -40,6 +40,10 @@
 				<mvc:mapping path="/dev/**"/>
 				<bean class="com.appsys.controller.intercopter.DevUserInterceptor"></bean>
 			</mvc:interceptor>
+			<mvc:interceptor>
+				<mvc:mapping path="/backend/**"/>
+				<bean class="com.appsys.controller.intercopter.BackendUserInterceptor"></bean>
+			</mvc:interceptor>
 		</mvc:interceptors>
 		<!-- 视图解析器 -->
 		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

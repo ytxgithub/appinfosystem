@@ -20,5 +20,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		// TODO Auto-generated method stub
 		return dataDictionary.listFlatform();
 	}
+	@Override
+	public List<DataDictionary> listAppStatus() {
+		// TODO Auto-generated method stub
+		return dataDictionary.listAppStatus();
+	}
+	@Override
+	public List<DataDictionary> listPublishstatus() {
+		// TODO Auto-generated method stub
+		return dataDictionary.listPublishstatus();
+	}
 
 }

@@ -23,4 +23,12 @@ public class DevUserServiceImpl implements DevUserService {
 		return devUserMapper.login(devUser);
 	}
 
+	@Override
+	public int changePassword(Long devId,String newPassword) {
+		DevUser devUser=new DevUser();
+		devUser.setId(devId);
+		devUser.setDevpassword(newPassword);
+		return devUserMapper.changePassword(devUser);
+	}
+
 }

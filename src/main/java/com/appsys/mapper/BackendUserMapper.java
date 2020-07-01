@@ -39,4 +39,11 @@ public interface BackendUserMapper {
 	 * @mbggenerated  Fri Jun 19 17:35:16 CST 2020
 	 */
 	int updateByPrimaryKey(BackendUser record);
+	
+	/**
+	 * 管理者登录
+	 * @param backendUser
+	 * @return
+	 */
+	BackendUser findByBackendUser(BackendUser backendUser);
 }

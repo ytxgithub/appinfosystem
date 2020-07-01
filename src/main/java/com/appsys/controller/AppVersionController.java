@@ -91,10 +91,13 @@ public class AppVersionController {
 		appVersion.setModifydate(new Date());
 		
 		appVersionService.saveVersion(appVersion);
+		//增加版本后，将最新版本关联到应用
 		AppInfo appInfo=appInfoService.findAppInfoById(appVersion.getAppid());
 		//之所以能获取id 有主键回填
 		appInfo.setVersionid(appVersion.getId());
 		appInfoService.modify(appInfo);
+		//增加新版本 应用状态修改为待审核
+		appInfoService.audit(appInfo.getId());
 		return "redirect:/appinfo/applist";
 	}
 	
@@ -156,6 +159,9 @@ public class AppVersionController {
 		appVersion.setModifyby(devUser.getId());
 		appVersion.setModifydate(new Date());
 		appVersionService.modifyVersion(appVersion);
+		
+		//修改最新版本 应用状态修改为待审核
+		appInfoService.audit(appVersion.getAppid());
 		return "redirect:/appinfo/applist";
 		
 	}

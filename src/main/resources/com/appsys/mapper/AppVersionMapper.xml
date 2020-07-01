@@ -242,8 +242,15 @@
   <select id="findAppId" parameterType="long" resultType="AppVersion">
   		select <include refid="Base_Column_List1"></include>,t2.valueName publishstatusName
   		from app_version t1 join data_dictionary t2 on t1.publishStatus=t2.valueId
-  		 where t1.appId=#{appid} and t2.typeCode='PUBLISH_STATUS'
-  		order by t1.id desc
+  		 where t1.appid=#{appid} and t2.typeCode='PUBLISH_STATUS'
+  		
+  </select>
+  
+  <select id="findById2" parameterType="long" resultType="AppVersion">
+  		select <include refid="Base_Column_List1"></include>,t2.valueName publishstatusName
+  		from app_version t1 join data_dictionary t2 on t1.publishStatus=t2.valueId
+  		 where t1.Id=#{id} and t2.typeCode='PUBLISH_STATUS'
+  		
   </select>
   
   <!-- 根据应用id删除对应的版本 -->
